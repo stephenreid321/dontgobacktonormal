@@ -1,0 +1,27 @@
+<div class="card shadow-sm alternative">
+  <div style="display: block; position: relative; font-size: 0.9rem; cursor: pointer" data-href="<%=alternative['URL']%>">
+    <img onerror="this.style.display='none'" class="card-img-top" src="<%= alternative['Images'].first['url'] if alternative['Images']%>">
+    <a target="_blank" href="<%=alternative['URL']%>" class="site text-white p-3" style="text-decoration: none; display: none; position: absolute; height: 100%; width: 100%; top: 0; background: rgba(0,0,0,0.5)">
+      <%= alternative['Description'] %>  
+    </a>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col">
+        <h5 class="card-title mb-1">
+          <a target="_blank" href="<%=alternative['URL']%>" class="text-dark">
+            <%= alternative['Name'] %>
+          </a>
+        </h5>
+        <% alternative['Tags'].each { |tag| %>
+          <span style="font-weight: normal" class="badge badge-primary"><%=tag%></span>
+        <% } if alternative['Tags'] %>        
+      </div>
+      <div class="col-auto">
+        <a class="discuss text-dark" style="display: none" href="/<%=alternative['Slug']%>">
+          <i class="fa fa-link"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

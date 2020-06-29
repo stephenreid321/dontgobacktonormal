@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=fallback" rel="stylesheet">
+
+
+    <% {            
+      'jquery/3.2.0' => 'jquery.min.js',
+      'jqueryui/1.12.1' => 'jquery-ui.min.js',
+      'popper.js/1.11.0' => 'umd/popper.min.js',
+      'twitter-bootstrap/4.0.0-beta' => 'js/bootstrap.min.js',
+      'jquery-timeago/1.4.3' => 'jquery.timeago.min.js',
+      'FitText.js/1.2.0' => 'jquery.fittext.min.js'
+      }.each { |k,v| %>    
+      <% v.split(' ').each { |f| u = "https://cdnjs.cloudflare.com/ajax/libs/#{k}/#{f}" %>
+        <% case f.split('.').last.to_sym; when :js %>
+          <script src="<%=u%>"></script>      
+        <% when :css %>
+          <link rel="stylesheet" href="<%=u%>" />
+        <% end %>
+      <% } %>
+    <% } %>
+
+    <% [
+      '/stylesheets/share.css',
+      "/stylesheets/app.css?#{@cachebuster}",
+      ].each { |f| %> 
+      <link rel="stylesheet" href="<%=f%>" />    
+    <% } %>
+
+    <% [
+      '//cdn.rawgit.com/wordsandwriting/activate-tools/f39002fcc10a9a554c651543b3065847130c2811/js/jquery.geopicker.js',      
+      '//use.fontawesome.com/releases/v5.9.0/js/all.js',
+      "/javascripts/app.js?#{@cachebuster}"
+      ].each { |f| %>
+      <script src="<%=f%>"></script>
+    <% } %>  
+
+    <title><%=if @full_title; t = @full_title; elsif @title; t = "#{@title} · Don't Go Back To Normal"; else; t = "Don't Go Back To Normal"; end %></title>        
+    <meta property="og:title" content="<%=t%>" />
+    <meta name="twitter:title" content="<%=t%>">
+
+    <meta name="twitter:description" content="<%=@og_desc%>">
+    <meta name="description" content="<%=@og_desc%>">    
+
+    <meta property="og:image" content="<%= @og_image%>?<%=@cachebuster%>" />
+    <meta name="twitter:image" content="<%=@og_image%>?<%=@cachebuster%>">    
+
+    <meta name="twitter:card" content="summary_large_image">
+
+    <%= favicon_tag 'd-circle-transparent.png' %>
+
+  </head>
+  <body>
+
+    <%= partial :alert %>          
+
+    <div class="container-fluid">
+      <div class="row justify-content-center">
+        <div class="col-12 col-sm-8">
+
+          <% if params[:alt_title] %>
+            <a href="/"><img src="/images/header.png" class="my-4 w-100" /></a>
+          <% else %>          
+            <script>
+              $(function () {
+                $("h1").fitText(1.44);
+              })
+            </script>
+            <h1 class="my-3">
+              <a class="text-dark" style="text-decoration: none" href="/">Don't Go Back To Normal</a>
+              <div style="height: 0.75vw; margin-top: -0.25vw;
+                   background: linear-gradient(90deg, <%= @colors.each_with_index.map { |color,i| "#{color} #{(100.to_f/@colors.count)*i}%" }.join(', ') %>);
+                   ">
+              </div>            
+            </h1>
+          <% end %>
+
+        </div>
+      </div>
+    </div>
+
+    <%= yield %>
+
+    <div class="mt-4">
+      <h5 class="text-center">Get email updates</h5>
+      <iframe src="https://dontgobacktonormal.substack.com/embed" width="100%" height="120" frameborder="0" scrolling="no"></iframe>
+    </div>
+
+    <div class="text-center mb-3">
+
+      <a class="btn btn-primary mb-1" target="_blank" href="https://donorbox.org/dontgobacktonormal">
+        Donate with £$€
+      </a>      
+      <a class="btn btn-primary mb-1" target="_blank" href="https://commerce.coinbase.com/checkout/02c70c4c-eff1-44d6-a863-48319aa0ea2d">
+        Donate with Crypto
+      </a>
+
+    </div>  
+
+    <div class="my-3 text-center px-1">
+      <p style="font-size: 3rem">
+        <a data-toggle="tooltip" title="Join us on Dandelion" style="color: black" href="https://dandelion.earth/o/dontgobacktonormal">
+          <img src="/images/dandelion-logo.png" style="height: 48px; position: relative; top: -5px" /></a>                   
+        <a data-toggle="tooltip" title="Join us on Riot" class="text-dark" href="https://riot.im/app/#/group/+dontgobacktonormal:matrix.org">
+          <img src="/images/riot-512.png" style="height: 48px; position: relative; top: -5px" /></a>
+        <a data-toggle="tooltip" title="Join us on Telegram" style="color: black" href="https://t.me/dontgobacktonormal">
+          <i class="fab fa-telegram"></i></a>                
+      </p>
+      <p>
+        Created by <a target="_blank" href="http://stephenreid.net">Stephen Reid</a>
+        & <a target="_blank" href="http://www.phoebetickell.com/">Phoebe Tickell</a>
+        &middot;
+        <a target="_blank" href="https://airtable.com/shr69kYDR7fI5teKM">Suggest an alternative</a>
+        &middot;
+        <a href="mailto:stephen@stephenreid.net;phoebetickell@gmail.com?subject=Don't+Go+Back+To+Normal">Contact us</a>
+        &middot;
+        Data on <a target="_blank" href="https://airtable.com/shrlwWVueiyD3XUKX">Airtable</a>
+      </p>      
+      <p>
+        Gratitude to our advisors <br />
+        <%= Advisor.all( sort: { "Name" => "asc" }).map { |advisor| %Q{<a href="#{advisor['URL']}">#{advisor['Name']}</a>} }.to_sentence(last_word_connector: ' and ') %>
+      </p>
+    </div>
+
+  </body>
+</html>

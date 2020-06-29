@@ -1,0 +1,130 @@
+
+<div class="container-fluid">
+  <div class="row justify-content-center">
+    <div class="col-12 col-sm-8">
+      <%= md 'https://www.dropbox.com/s/epbx6s69yysyrj0/intro.md?dl=0' %>           
+    </div>
+  </div>
+  
+  <div class="row justify-content-center">
+    <div class="col-auto">
+      <%= partial :a2a %>
+    </div>
+  </div>
+
+</div>
+
+<style>
+  #nav {
+    scrollbar-width: thin;
+  }  
+  #nav::-webkit-scrollbar {
+    height: 0px;
+  }
+</style>
+<div class="mb-2"></div>
+<div id="nav" class="text-center position-sticky bg-white" style="top: 0; z-index: 99; white-space: nowrap; overflow-x: auto">
+  <div class="p-2">
+    <% @category_names.each_with_index { |category,i|  %>
+      <a class="category-btn" id="<%=category.parameterize%>-btn" href="#<%=category.parameterize%>"><%=category%></a>
+      <style>
+        #<%=category.parameterize%>-btn { 
+          display: inline-block;
+          color: <%=@colors[i]%>;
+          border: 2px solid <%=@colors[i]%>;
+          border-radius: 0.25rem;
+          padding: 0.25rem 0.5rem;
+          margin-bottom: 0.25rem;
+          font-weight: 400;
+          <% if category == @category_names.last %>
+            margin-right: 0.5rem;
+          <% end %>
+        }
+        #<%=category.parameterize%>-btn:hover, #<%=category.parameterize%>-btn.hover {
+          color: white;
+          background: <%=@colors[i]%>
+        }
+      </style>
+    <% } %>
+  </div>
+</div>
+<div class="mt-2"></div>
+
+<script>
+
+  function scrollToActiveBtn() {
+    if ($('.category-btn.hover').length > 0) {
+      var l = ($('#nav').scrollLeft() + $('.category-btn.hover').last().offset()['left'] - $(window).width() / 2 + $('.category-btn.hover').last().width() / 2 + 10)
+      if (!$('#nav').is(':animated')) {
+        // console.log('animating #nav scrollLeft to ' + l)
+        $('#nav').stop().animate({
+          scrollLeft: l
+        }, 100)
+      }
+    }
+  }
+
+  $(function () {
+    $(window).resize(function () {
+      $('.id-helper').css('top', -1 * $('#nav').height())
+    })
+    $(window).resize()
+
+
+    $(window).scroll(function () {
+
+<%@category_names.each { |category| %>
+        if (window.scrollY > ($('#<%=category.parameterize%>').offset()['top'] - 1))
+          $('#<%=category.parameterize%>-btn').addClass('hover')
+        else
+          $('#<%=category.parameterize%>-btn').removeClass('hover')
+
+        var scrollHeight = Math.max(
+                document.body.scrollHeight, document.documentElement.scrollHeight,
+                document.body.offsetHeight, document.documentElement.offsetHeight,
+                document.body.clientHeight, document.documentElement.clientHeight
+                );
+
+        if ((window.scrollY + window.innerHeight) == scrollHeight)
+          $('.category-btn').last().addClass('hover')
+
+<%} %>
+
+      scrollToActiveBtn()
+    })
+    $(window).scroll()
+
+    $('.category-btn').click(scrollToActiveBtn())
+
+  })
+</script>
+
+<% @categories.each_with_index { |category,i| %>
+
+  <div class="id-helper" style="position: relative;" id="<%=category['Name'].parameterize%>"></div>
+  <div style="background: <%=@bg_colors[i]%>" class="px-4 pt-4">
+
+    <h2 class="text-center <%= category['Description'] ? 'mb-2' : 'mb-4' %>">Do <u><%=category['Name']%></u> differently</h2>
+
+    <div class="row justify-content-center">
+      <div class="col-12 col-sm-8">
+        <% if category['Description'] %>  
+          <p class="lead text-center">
+            <%= category['Description'] %>
+          </p>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="row">
+      <% Alternative.all(filter: "AND({Category} = '#{category['Name']}', {Confirmed} = 1)").each { |alternative| %>
+        <div class="col-sm-4 mb-4">
+          <%= partial :alternative, :object => alternative %>
+        </div>              
+      <% } %>
+    </div>
+
+  </div>
+
+<% } %>
+
