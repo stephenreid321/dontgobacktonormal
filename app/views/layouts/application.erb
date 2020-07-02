@@ -67,20 +67,9 @@
         <div class="col-12 col-sm-8">
 
           <% if params[:alt_title] %>
-            <a href="/"><img src="/images/header.png" class="my-4 w-100" /></a>
+            <a href="/"><img src="/images/header.png" class="mb-3 w-100" /></a>
           <% else %>          
-            <script>
-              $(function () {
-                $("h1").fitText(1.44);
-              })
-            </script>
-            <h1 class="my-3">
-              <a class="text-dark" style="text-decoration: none" href="/">Don't Go Back To Normal</a>
-              <div style="height: 0.75vw; margin-top: -0.25vw;
-                   background: linear-gradient(90deg, <%= @colors.each_with_index.map { |color,i| "#{color} #{(100.to_f/@colors.count)*i}%" }.join(', ') %>);
-                   ">
-              </div>            
-            </h1>
+            <a href="/"><img src="/images/long.png" class="my-4 w-100" /></a>
           <% end %>
 
         </div>
