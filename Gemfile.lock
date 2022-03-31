@@ -1,14 +1,14 @@
 GIT
-  remote: git://github.com/mislav/will_paginate.git
-  revision: 8113fddf4b506867e9af3aa59fe2df314b79860c
+  remote: https://github.com/mislav/will_paginate.git
+  revision: c732deeba65e709e6c5d223584e2fc4448a12334
   specs:
-    will_paginate (3.3.0)
+    will_paginate (3.3.1)
 
 GIT
-  remote: git://github.com/wordsandwriting/activate-tools.git
-  revision: 04f7fc34ece9d9164d13ddf6f0033e2c774cdaf5
+  remote: https://github.com/wordsandwriting/activate-tools.git
+  revision: 22965b0b1cc2f1dd8cdb46c1efd4c459601a99f8
   specs:
-    activate-tools (0.0.7)
+    activate-tools (0.0.17)
       padrino
 
 GEM
@@ -70,7 +70,7 @@ GEM
     net-http-digest_auth (1.4.1)
     net-http-persistent (3.1.0)
       connection_pool (~> 2.2)
-    nio4r (2.5.2)
+    nio4r (2.5.8)
     nokogiri (1.10.9)
       mini_portile2 (~> 2.4.0)
     ntlm-http (0.1.1)
@@ -106,7 +106,7 @@ GEM
       padrino-core (= 0.14.4)
     padrino-support (0.14.4)
     public_suffix (4.0.4)
-    puma (4.3.3)
+    puma (4.3.12)
       nio4r (~> 2.0)
     rack (2.2.2)
     rack-protection (2.0.2)
