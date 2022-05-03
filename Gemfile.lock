@@ -1,14 +1,14 @@
 GIT
-  remote: git://github.com/mislav/will_paginate.git
-  revision: 8113fddf4b506867e9af3aa59fe2df314b79860c
+  remote: https://github.com/mislav/will_paginate.git
+  revision: c732deeba65e709e6c5d223584e2fc4448a12334
   specs:
-    will_paginate (3.3.0)
+    will_paginate (3.3.1)
 
 GIT
-  remote: git://github.com/wordsandwriting/activate-tools.git
-  revision: 04f7fc34ece9d9164d13ddf6f0033e2c774cdaf5
+  remote: https://github.com/wordsandwriting/activate-tools.git
+  revision: 22965b0b1cc2f1dd8cdb46c1efd4c459601a99f8
   specs:
-    activate-tools (0.0.7)
+    activate-tools (0.0.17)
       padrino
 
 GEM
@@ -108,8 +108,8 @@ GEM
     public_suffix (4.0.4)
     puma (4.3.3)
       nio4r (~> 2.0)
-    rack (2.2.2)
-    rack-protection (2.0.2)
+    rack (2.2.3)
+    rack-protection (2.2.0)
       rack
     rake (13.0.1)
     rb-fsevent (0.10.3)
@@ -120,16 +120,16 @@ GEM
     rexml (3.2.4)
     rss (0.2.9)
       rexml
-    ruby2_keywords (0.0.2)
+    ruby2_keywords (0.0.5)
     sass (3.7.4)
       sass-listen (~> 4.0.0)
     sass-listen (4.0.0)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
-    sinatra (2.0.2)
+    sinatra (2.2.0)
       mustermann (~> 1.0)
-      rack (~> 2.0)
-      rack-protection (= 2.0.2)
+      rack (~> 2.2)
+      rack-protection (= 2.2.0)
       tilt (~> 2.0)
     thor (0.20.3)
     thread_safe (0.3.6)
@@ -160,7 +160,7 @@ DEPENDENCIES
   redcarpet
   rss
   sass
-  sinatra (= 2.0.2)
+  sinatra (= 2.2.0)
   will_paginate!
 
 RUBY VERSION
